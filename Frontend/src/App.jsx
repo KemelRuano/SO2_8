@@ -8,13 +8,49 @@ function App() {
   const [mostrarDash, setmostrarDash] = useState(false);
   const [mostrarSol, setmostrarSol] = useState(false);
 
+  const [global, setglobal] = useState({});
+  const [ListS, SetListS] = useState([]);
+
+
   const Dashboard = ()=> {
     setmostrarSol(false);
     setmostrarDash(!mostrarDash);
+
+    fetch("http://localhost:3000/dashboard",{
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      setglobal(data);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+    
   };
+
+
   const Solicitudes = ()=> {
     setmostrarDash(false);
     setmostrarSol(!mostrarSol);
+
+    fetch("http://localhost:3000/solicitud",{
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      SetListS(data);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+    console.log(ListS);
   };
 
   return (
@@ -27,12 +63,12 @@ function App() {
         </div>
         {mostrarDash && (
             <div className="content">
-              <Dash />
+              <Dash ListParms={global} />
             </div>
          )}
          {mostrarSol && (
             <div className="content">
-              <Solicitud />
+              <Solicitud TableList={ListS}/>
             </div>
          )}
       </div>

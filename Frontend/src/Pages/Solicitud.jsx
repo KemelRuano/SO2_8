@@ -1,14 +1,7 @@
 import React,{useState} from 'react';
 
 import "../Diseño/tabla.css"
-export const Solicitud = () => {
-    
-    const [datos, setDatos] = useState([
-        { id: 1, nombre: 'Ejemplo 1', descripcion: 'Descripción 1' },
-        { id: 2, nombre: 'Ejemplo 2', descripcion: 'Descripción 2' },
-        { id: 3, nombre: 'Ejemplo 3', descripcion: 'Descripción 3' }
-        ]);
-  
+export const Solicitud = ({TableList}) => {
     return (
         <div className="tabla-container">
             <table className="tabla">
@@ -21,12 +14,12 @@ export const Solicitud = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {datos.map((dato) => (
-                    <tr key={dato.id}>
-                    <td>{dato.id}</td>
-                    <td>{dato.nombre}</td>
-                    <td>{dato.descripcion}</td>
-                    <td>{dato.descripcion}</td>
+                {TableList.map((dato) => (
+                    <tr key={dato.pid}>
+                    <td>{dato.pid}</td>
+                    <td>{dato.call}</td>
+                    <td>{dato.size}</td>
+                    <td>{dato.fecha}</td>
                     </tr>
                 ))}
                 </tbody>
