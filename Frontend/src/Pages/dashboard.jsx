@@ -61,8 +61,8 @@ export const Dash = ({ListParms}) => {
                         <tr key={dato.pid}>
                         <td>{dato.pid}</td>
                         <td>{dato.name}</td>
-                        <td>{dato.memoria}</td>
-                        <td>{dato.cpu}</td>
+                        <td>{dato.memoria}KB</td>
+                        <td>{dato.cpu}%</td>
                         </tr>
                     ))}
                     </tbody>

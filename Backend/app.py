@@ -13,21 +13,23 @@ def index():
 @app.route('/dashboard', methods=['GET'])
 def Dashboard():
    
-    results = query("SELECT * FROM dashboard")
+    results = query("SELECT * FROM Proyecto2.dashboard;")
+
     ListaPid = []
     ListaPorcentaje = []
     for i in results:
-        ListaPid.append(i[0])
-        ListaPorcentaje.append(i[3])
+        ListaPid.append(i[1])
+        ListaPorcentaje.append(float(i[4]))
 
     ListaDatos = []
     for i in results:
         ListaDatos.append({
-            "pid": i[0],
-            "name": i[1],
-            "memoria": i[2],
-            "cpu": i[3]
+            "pid": i[1],
+            "name": i[2],
+            "memoria": int(i[3])/1000,
+            "cpu": i[4]
         })
+
 
     list_map = {
         "ListaPid": ListaPid,
@@ -40,16 +42,17 @@ def Dashboard():
 
 @app.route('/solicitud', methods=['GET'])
 def Solicitud():
-    results = query("SELECT * FROM solicitud")
+    results = query("SELECT * FROM  Proyecto2.llamada;")
 
     list_map = []
     for i in results:
         list_map.append({
-            "pid": i[0],
-            "call": i[1],
-            "size": i[2],
-            "fecha": i[3]
+            "pid": i[1],
+            "call": i[2],
+            "size": int(i[3])/1000,
+            "fecha": i[4].strftime("%Y/%m/%d %H:%M:%S")
         })
+        print(i[4])
   
     return  jsonify(list_map)
 if __name__ == '__main__':

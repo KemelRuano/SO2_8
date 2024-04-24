@@ -18,7 +18,7 @@ export const Solicitud = ({TableList}) => {
                     <tr key={dato.pid}>
                     <td>{dato.pid}</td>
                     <td>{dato.call}</td>
-                    <td>{dato.size}</td>
+                    <td>{dato.size}KB</td>
                     <td>{dato.fecha}</td>
                     </tr>
                 ))}
