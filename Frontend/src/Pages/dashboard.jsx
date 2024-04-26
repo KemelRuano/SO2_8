@@ -3,6 +3,7 @@ import React,{useState} from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut  } from 'react-chartjs-2';
 ChartJS.register(ArcElement, Tooltip, Legend);
+import ChartDataLabels from 'chartjs-plugin-datalabels'; // Importa el plugin
 import '../Diseño/tabla.css';
 
 export const Dash = ({ListParms}) => {
@@ -17,9 +18,8 @@ export const Dash = ({ListParms}) => {
       const b = Math.floor(Math.random() * 256);
       return `rgba(${r}, ${g}, ${b}, 0.6)`;
     };
-
     const data = {
-      labels: ListParms.ListaPid,
+      labels: ListParms.ListTable.map(dato => dato.name+ " - " + dato.pid), // Agregamos más datos a cada etiqueta
       datasets: [
         {
           data: ListParms.ListDatos,
@@ -29,23 +29,31 @@ export const Dash = ({ListParms}) => {
     };
 
     const opciones = {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-            position: 'bottom',
-            },
-            title: {
-            display: true,
-            text: 'Chart.js Doughnut Chart'
-            }
-        }
-        };
-
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+          legend: {
+              position: 'bottom',
+          },
+          title: {
+              display: true,
+              text: 'Chart.js Doughnut Chart'
+          },
+          datalabels: { // Configuración del plugin datalabels
+              formatter: (value, ctx) => { // Formateador para personalizar los datos en cada segmento
+                  let label = ctx.chart.data.labels[ctx.dataIndex]; // Obtiene el label del segmento
+                  label += '\n' + value + '%'; // Agrega el valor del porcentaje
+                  return label;
+              },
+              color: '#fff', // Color del texto
+              display: 'auto' // Muestra el valor en todos los segmentos
+          }
+      }
+    };
     return (
         <div style ={{display: 'flex' }}>
             <div style={{ width: '500px', height: '500px' }}>
-                <Doughnut data={data}  options={opciones} />
+                <Doughnut data={data}  options={opciones} plugins={[ChartDataLabels]}  />
             </div>
             <div className="tabla-container">
                 <table className="tabla">

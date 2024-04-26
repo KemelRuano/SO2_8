@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dash } from "./Pages/dashboard";
 import { Solicitud } from "./Pages/Solicitud";
 import "./Diseño/App.css";
@@ -11,11 +10,8 @@ function App() {
   const [global, setglobal] = useState({});
   const [ListS, SetListS] = useState([]);
 
-
-  const Dashboard = ()=> {
-    setmostrarSol(false);
-    setmostrarDash(!mostrarDash);
-
+  // Función para obtener los datos del dashboard
+  const obtenerDatosDashboard = () => {
     fetch("http://localhost:3000/dashboard",{
       method: "GET",
       headers: {
@@ -29,9 +25,23 @@ function App() {
     .catch((error) => {
       console.error("Error:", error);
     });
-    
   };
 
+  // Función para actualizar el dashboard cada 3 segundos
+  useEffect(() => {
+    const intervalId = setInterval(obtenerDatosDashboard, 3000);
+
+
+    return () => clearInterval(intervalId);
+  }, []); // 
+
+  const Dashboard = ()=> {
+    setmostrarSol(false);
+    setmostrarDash(!mostrarDash);
+    
+    obtenerDatosDashboard(); 
+
+  };
 
   const Solicitudes = ()=> {
     setmostrarDash(false);
@@ -50,7 +60,6 @@ function App() {
     .catch((error) => {
       console.error("Error:", error);
     });
-    console.log(ListS);
   };
 
   return (
