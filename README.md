@@ -64,6 +64,7 @@ Esta función define una ruta en la aplicación Flask para la URL '/dashboard'. 
 
 # Modulo C
 ## librerias utilizadas
+
 <img src="./imagenes/librerias2.png" alt="drawing"/>
 
 ## Lector - Estructura del Código
