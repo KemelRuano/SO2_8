@@ -48,7 +48,7 @@ Vim, Emacs, o instalar un IDE como NetBeans, Code::Blocks, o Visual Studio Code
 
 # backend
 ## librerias utilizadas
-    <img src="./imagenes/librerias.png" alt="drawing"/>
+<img src="./imagenes/librerias.png" alt="drawing"/>
 
 ## Metodo main
  hace que la aplicación Flask esté disponible para recibir y procesar solicitudes HTTP en una dirección IP específica y un puerto específico, y con la capacidad de recargar automáticamente cuando se realizan cambios en el código.
