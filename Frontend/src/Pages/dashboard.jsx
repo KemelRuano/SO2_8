@@ -42,10 +42,10 @@ export const Dash = ({ListParms}) => {
           datalabels: { // Configuración del plugin datalabels
               formatter: (value, ctx) => { // Formateador para personalizar los datos en cada segmento
                   let label = ctx.chart.data.labels[ctx.dataIndex]; // Obtiene el label del segmento
-                  label += '\n' + value + '%'; // Agrega el valor del porcentaje
+                
                   return label;
               },
-              color: '#fff', // Color del texto
+              color: 'black', // Color del texto
               display: 'auto' // Muestra el valor en todos los segmentos
           }
       }
