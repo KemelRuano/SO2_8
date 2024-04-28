@@ -10,27 +10,30 @@ function App() {
   const [global, setglobal] = useState({});
   const [ListS, SetListS] = useState([]);
 
-  // Función para obtener los datos del dashboard
-  const obtenerDatosDashboard = () => {
-    fetch("http://localhost:3000/dashboard",{
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-    .then((response) => response.json())
-    .then((data) => {
-      setglobal(data);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-  };
+  
 
   // Función para actualizar el dashboard cada 3 segundos
   useEffect(() => {
+      const obtenerDatosDashboard = () => {
+        fetch("http://localhost:3000/dashboard",{
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => response.json())
+        .then((data) => {
+    
+          setglobal(data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+      };
+      
+    obtenerDatosDashboard();
+    setmostrarDash(!mostrarDash);
     const intervalId = setInterval(obtenerDatosDashboard, 3000);
-
 
     return () => clearInterval(intervalId);
   }, []); // 
@@ -38,9 +41,6 @@ function App() {
   const Dashboard = ()=> {
     setmostrarSol(false);
     setmostrarDash(!mostrarDash);
-    
-    obtenerDatosDashboard(); 
-
   };
 
   const Solicitudes = ()=> {

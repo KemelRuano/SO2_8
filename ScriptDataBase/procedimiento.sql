@@ -1,4 +1,3 @@
-
 DELIMITER //
 CREATE PROCEDURE InsertOrUpdateDashboard(
     IN p_pid INT,
@@ -19,7 +18,7 @@ BEGIN
     ELSE
         INSERT INTO dashboard (pid, name, size, memoria)
         VALUES (p_pid, p_name, p_size, p_memoria);
+        
     END IF;
 END //
 DELIMITER ;
-
